@@ -70,14 +70,25 @@ def setupCollection(name): # deletes and creates a new collection called name
     try:
         bpy.data.collections.remove(collection)
     finally:
+        
         collection = bpy.data.collections.new(name)
         bpy.context.scene.collection.children.link(collection)
-
+       
+def cleanUp():
+    for block in bpy.data.objects: #remove orphaned nodes
+        if not block.users:
+            bpy.data.objects.remove(block)
+    for block in bpy.data.meshes: #remove orphaned nodes
+        if not block.users:
+            bpy.data.meshes.remove(block)
+    for block in bpy.data.materials: #remove orphaned nodes
+        if not block.users:
+            bpy.data.materials.remove(block)
 if __name__ == "__main__":
 
     setupCollection("Balls")   
     setupCollection("Rods")   
+    
     addMesh(3,3,3)
 
-
-    
+    cleanUp()
