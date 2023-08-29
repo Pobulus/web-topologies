@@ -3,6 +3,7 @@ import mathutils
 r = 10
 black = bpy.data.materials.new("Black")
 black.diffuse_color = (0,0,0,0.8)
+black.specular_intensity = 0
 def addBall(x,y,z):
     bpy.ops.mesh.primitive_ico_sphere_add()
     # our created cube is the active one
